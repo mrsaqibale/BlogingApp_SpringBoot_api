@@ -1,11 +1,15 @@
 package com.blog.entites;
 
-import jakarta.annotation.Generated;
+import java.util.List;
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -37,6 +41,18 @@ public class User {
 
 	@Column( nullable = false)
 	private boolean isDeleted = false;
+	
+	
+	@ManyToMany(mappedBy = "users")
+	private List<Role> roles ;
+	
+
+	@OneToMany(mappedBy = "users")
+	private List<Comment> comments ;
+
+	
+	@OneToMany(mappedBy = "users")
+	private List<Post> posts ;
 
 
 }
