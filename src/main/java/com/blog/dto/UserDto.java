@@ -30,11 +30,11 @@ public class UserDto {
 
 	private String picture;
 
-	private List<Role> roles ;
+	// private List<Role> roles ;
 	
 
-	private List<Comment> comments ;
+	// private List<Comment> comments ;
 
 	
-	private List<Post> posts ;
+	// private List<Post> posts ;
 }
