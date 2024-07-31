@@ -12,9 +12,6 @@ class BlogingAppApiApplicationTests {
 	void contextLoads() {
 	}
 	
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
+
 
 }
