@@ -2,14 +2,22 @@ package com.blog.ServiceImp;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.blog.dto.UserDto;
+import com.blog.entites.User;
+import com.blog.repository.UserRepo;
 import com.blog.service.UserServ;
 
 public class UserServImp implements UserServ {
 
+	@Autowired
+	UserRepo userRepo ;
+	
 	@Override
 	public UserDto createUser(UserDto userDto) {
-		// TODO Auto-generated method stub
+		User user ;
+		
 		return null;
 	}
 
