@@ -14,9 +14,11 @@ public class UserServImp implements UserServ {
 	@Autowired
 	UserRepo userRepo ;
 	
+//	modelmapper wired
+	
 	@Override
 	public UserDto createUser(UserDto userDto) {
-		User user ;
+		
 		
 		return null;
 	}
