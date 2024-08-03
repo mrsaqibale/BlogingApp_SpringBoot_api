@@ -43,8 +43,8 @@ public class UserServImp implements UserServ {
 
 	@Override
 	public void deleteUser(Long id) {
-		// TODO Auto-generated method stub
-
+		// delete user by id
+		this.userRepo.deleteById(id);
 	}
 
 	@Override

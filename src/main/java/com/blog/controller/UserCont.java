@@ -3,6 +3,7 @@ package com.blog.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,11 @@ public class UserCont {
     // update user PUT
 
     // delete user DELETE
-
+    @DeleteMapping("/{userId}")
+    public String deleteUser(@PathVariable Long userId){
+        userServ.deleteUser(userId);
+        return "ok";
+    }
     // get user by id GET
     
     @GetMapping("/{userId}")
