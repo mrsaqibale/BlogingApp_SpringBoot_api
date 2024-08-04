@@ -23,6 +23,7 @@ public class UserCont {
     // create user POST
     @PostMapping("/")
     public ResponseEntity<UserDto> createUser(UserDto userDto){
+        System.out.println("the data is " + userDto.getEmail());
         UserDto user = userServ.createUser(userDto);
         return new  ResponseEntity<>(user,HttpStatus.CREATED);
     }

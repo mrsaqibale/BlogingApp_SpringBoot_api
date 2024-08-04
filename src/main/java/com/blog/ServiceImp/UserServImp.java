@@ -11,7 +11,7 @@ import com.blog.dto.UserDto;
 import com.blog.entites.User;
 import com.blog.repository.UserRepo;
 import com.blog.service.UserServ;
-
+import com.blog.exceptions.ResourceNotFoundException;;
 @Service
 public class UserServImp implements UserServ {
 
@@ -26,12 +26,13 @@ public class UserServImp implements UserServ {
 	public UserDto createUser(UserDto userDto) {
 		User user = this.modelMapper.map(userDto, User.class);
 		User user1 = this.userRepo.save(user);
+		System.out.println(user.getEmail());
 		return this.modelMapper.map(user1, UserDto.class);
 	}
 
 	@Override
 	public UserDto getUserById(Long id) {
-		Optional<User> user = this.userRepo.findById(id);
+		User user = this.userRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("User ", " id ", id));
 		return this.modelMapper.map(user, UserDto.class);
 	}
 
@@ -43,13 +44,16 @@ public class UserServImp implements UserServ {
 
 	@Override
 	public void deleteUser(Long id) {
-		// delete user by id
-		this.userRepo.deleteById(id);
+		User user = this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User ", " id ", id));
+		this.userRepo.delete(user);
 	}
 
 	@Override
-	public UserDto updateUser(Long id) {
-		// TODO Auto-generated method stub
+	public UserDto updateUser(UserDto userDto,Long id) {
+		User user = this.userRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("User ", " id " , id));
+		user.setEmail(userDto.getEmail());
+		user.setPassword(userDto.getPassword());
+
 		return null;
 	}
 

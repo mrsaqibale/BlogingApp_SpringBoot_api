@@ -6,6 +6,11 @@ import com.blog.entites.Comment;
 import com.blog.entites.Post;
 import com.blog.entites.Role;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +21,7 @@ import lombok.Setter;
 
 public class UserDto {
 
-    private Long id;
+	private Long id;
 
 	private String username;
 
@@ -30,11 +35,14 @@ public class UserDto {
 
 	private String picture;
 
-	private List<Role> roles ;
-	
+	// private boolean isActive ;
 
-	private List<Comment> comments ;
+	// private boolean isDeleted ;
 
 	
-	private List<Post> posts ;
+	// private List<Role> roles ;
+	
+	// private List<Comment> comments ;
+
+	// private List<Post> posts ;
 }

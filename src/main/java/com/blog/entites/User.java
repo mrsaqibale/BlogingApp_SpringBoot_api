@@ -23,13 +23,13 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique = true, nullable = false)
+	@Column()
 	private String username;
 
-	@Column(unique = false, nullable = false)
+	@Column()
 	private String email;
 
-	@Column( nullable = false)
+	@Column()
 	private String password;
 
 	@Column()
@@ -41,10 +41,10 @@ public class User {
 	@Column()
 	private String picture;
 
-	@Column( nullable = false)
+	@Column()
 	private boolean isActive = true;
 
-	@Column( nullable = false)
+	@Column()
 	private boolean isDeleted = false;
 	
 	
