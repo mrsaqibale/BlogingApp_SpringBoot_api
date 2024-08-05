@@ -2,12 +2,15 @@ package com.blog.ServiceImp;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blog.dto.CommentDto;
+import com.blog.dto.PostDto;
+import com.blog.dto.UserDto;
 import com.blog.entites.Comment;
 import com.blog.repository.CommentRepo;
 import com.blog.service.CommentServ;
@@ -33,20 +36,24 @@ public class CommentServImp implements  CommentServ{
 
 	@Override
 	public CommentDto updateComment(CommentDto commentDto, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Comment comment = this.commentRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Comment", "Id", id));
+		comment.setComment(commentDto.getComment());
+		Comment fComment = this.commentRepo.save(comment);
+		return this.modelMapper.map(fComment, CommentDto.class);
 	}
 
 	@Override
 	public void deleteComment(Long id) {
 		Comment comment = this.commentRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Comment", "ID", id));
-		this.commentRepo.delete(comment);
+		comment.setDeleted(true);
+		this.commentRepo.save(comment);
 	}
 
 	@Override
 	public List<CommentDto> getAllComments() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Comment> comments = this.commentRepo.findAll();
+		List<CommentDto> commentDtos = comments.stream().map((comment) -> this.modelMapper.map(comment, CommentDto.class)).collect(Collectors.toList());
+		return commentDtos;
 	}
 
 	@Override
