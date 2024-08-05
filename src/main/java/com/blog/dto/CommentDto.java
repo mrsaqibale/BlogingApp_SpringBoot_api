@@ -1,6 +1,6 @@
 package com.blog.dto;
 
-import java.sql.Date;
+
 import java.time.LocalDateTime;
 
 import lombok.Getter;
@@ -14,6 +14,7 @@ public class CommentDto {
 
     private Long id;
 
+    
     private String comment;
 
     private LocalDateTime commentDate;
