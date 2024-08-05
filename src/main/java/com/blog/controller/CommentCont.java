@@ -1,6 +1,9 @@
 package com.blog.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,14 +34,14 @@ public class CommentCont {
 
     // create comment
     @PostMapping("/")
-    public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto commentDto){
+    public ResponseEntity<CommentDto> createComment(@Valid @RequestBody CommentDto commentDto){
         return ResponseEntity.ok(commentServ.createComment(commentDto));
     }
 
 
     // update comment 
     @PutMapping("update/{id}")
-    public ResponseEntity<CommentDto> updateComment(@PathVariable Long id, @RequestBody CommentDto commentDto) {
+    public ResponseEntity<CommentDto> updateComment(@Valid  @RequestBody CommentDto commentDto , @PathVariable Long id) {
         try {
             return ResponseEntity.ok(commentServ.updateComment(commentDto, id));
         } catch (Exception e) {

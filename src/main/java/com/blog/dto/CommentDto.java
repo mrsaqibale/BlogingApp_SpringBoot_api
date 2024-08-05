@@ -3,7 +3,7 @@ package com.blog.dto;
 
 import java.time.LocalDateTime;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -17,8 +17,8 @@ public class CommentDto {
 
     private Long id;
 
-    @NotEmpty
-    @Size(min = 1 , message = "Comment is not Valid")
+    @NotNull
+    @Size(min = 1, message = "Enter valid comment")
     private String comment;
 
     private LocalDateTime commentDate;
