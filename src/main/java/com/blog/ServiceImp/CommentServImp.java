@@ -11,7 +11,7 @@ import com.blog.dto.CommentDto;
 import com.blog.entites.Comment;
 import com.blog.repository.CommentRepo;
 import com.blog.service.CommentServ;
-
+import com.blog.exceptions.ResourceNotFoundException;
 @Service
 public class CommentServImp implements  CommentServ{
 
@@ -32,15 +32,15 @@ public class CommentServImp implements  CommentServ{
 	}
 
 	@Override
-	public CommentDto updateComment(CommentDto commentDto) {
+	public CommentDto updateComment(CommentDto commentDto, Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void deleteComment(Long id) {
-		// TODO Auto-generated method stub
-		
+		Comment comment = this.commentRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Comment", "ID", id));
+		this.commentRepo.delete(comment);
 	}
 
 	@Override
@@ -51,8 +51,8 @@ public class CommentServImp implements  CommentServ{
 
 	@Override
 	public CommentDto getCommentById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Comment comment = this.commentRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Comment ", " id ", id));
+		return this.modelMapper.map(comment, CommentDto.class);
 	}
 
 }

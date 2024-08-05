@@ -9,7 +9,7 @@ public interface CommentServ {
     CommentDto createComment(CommentDto commentDto);
 
     
-    CommentDto updateComment(CommentDto commentDto);
+    CommentDto updateComment(CommentDto commentDto,Long id);
     
 
     void deleteComment(Long id );
