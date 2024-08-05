@@ -1,6 +1,7 @@
 package com.blog.entites;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,10 +33,10 @@ public class Post {
     private String image;
 
     @Column(nullable = false)
-    private Date createDate;
+    private LocalDateTime createDate;
 
     @Column(nullable = false)
-    private Date updateDate;
+    private LocalDateTime updateDate;
     
     
 
