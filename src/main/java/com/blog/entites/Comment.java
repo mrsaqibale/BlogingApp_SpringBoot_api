@@ -1,5 +1,7 @@
 package com.blog.entites;
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +26,7 @@ public class Comment {
     private String comment;
 
     @Column(nullable = false)
-    private Date commentDate;
+    private LocalDateTime commentDate;
 
     @Column(nullable = false)
     private boolean isDeleted = false ;
