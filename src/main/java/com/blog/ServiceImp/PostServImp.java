@@ -2,6 +2,7 @@ package com.blog.ServiceImp;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,16 +48,20 @@ public class PostServImp implements PostServ {
 		Post post = this.postRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Post", "Id", id));
         this.postRepo.delete(post);
 	}
-
+    
 	@Override
 	public PostDto getPostById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+        Post post = this.postRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Post", "Id", id));
+
+        return this.modelMapper.map(post, PostDto.class);
+		
 	}
 
 	@Override
 	public List<PostDto> getAllPosts() {
-		// TODO Auto-generated method stub
+		List<Post> posts = this.postRepo.findAll();
+        List<PostDto> postDtos = posts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList);
+        return postDtos;
 		return null;
 	}
     
