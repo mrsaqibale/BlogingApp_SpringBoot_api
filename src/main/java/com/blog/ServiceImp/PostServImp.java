@@ -44,8 +44,8 @@ public class PostServImp implements PostServ {
 
 	@Override
 	public void deletePost(Long id) {
-		// TODO Auto-generated method stub
-		
+		Post post = this.postRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Post", "Id", id));
+        this.postRepo.delete(post);
 	}
 
 	@Override
