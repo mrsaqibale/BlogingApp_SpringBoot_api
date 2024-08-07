@@ -60,9 +60,8 @@ public class PostServImp implements PostServ {
 	@Override
 	public List<PostDto> getAllPosts() {
 		List<Post> posts = this.postRepo.findAll();
-        List<PostDto> postDtos = posts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList);
+        List<PostDto> postDtos = posts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
         return postDtos;
-		return null;
 	}
     
 }
