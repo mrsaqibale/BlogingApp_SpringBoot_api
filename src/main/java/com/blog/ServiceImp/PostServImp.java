@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.blog.dto.PostDto;
 import com.blog.entites.Post;
@@ -13,6 +14,7 @@ import com.blog.exceptions.ResourceNotFoundException;
 import com.blog.repository.PostRepo;
 import com.blog.service.PostServ;
 
+@Service
 public class PostServImp implements PostServ {
 
     @Autowired
