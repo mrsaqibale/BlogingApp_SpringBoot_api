@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.dto.UserDto;
 import com.blog.service.UserServ;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -29,15 +32,21 @@ public class UserCont {
     }
 
     // update user PUT
-
+    @PutMapping("path/{id}")
+    public String putMethodName(@PathVariable String id, @RequestBody String entity) {
+        //TODO: process PUT request
+        
+        return entity;
+    }
     // delete user DELETE
     @DeleteMapping("/{userId}")
     public String deleteUser(@PathVariable Long userId){
         userServ.deleteUser(userId);
         return "ok";
     }
+
+
     // get user by id GET
-    
     @GetMapping("/{userId}")
     public ResponseEntity<UserDto> getSingleUser(@PathVariable Long userId){
         return ResponseEntity.ok(userServ.getUserById(userId));
