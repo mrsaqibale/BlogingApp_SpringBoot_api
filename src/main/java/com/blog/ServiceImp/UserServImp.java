@@ -2,6 +2,8 @@ package com.blog.ServiceImp;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,9 @@ public class UserServImp implements UserServ {
 	@Override
 	public UserDto createUser(UserDto userDto) {
 		User user = this.modelMapper.map(userDto, User.class);
+		user.setDeleted(false);
+		user.setActive(true);
 		User user1 = this.userRepo.save(user);
-		System.out.println(user.getEmail());
 		return this.modelMapper.map(user1, UserDto.class);
 	}
 
@@ -38,14 +41,18 @@ public class UserServImp implements UserServ {
 
 	@Override
 	public List<UserDto> getAllUsers() {
-		// 
-		return null;
+		List<User> users = this.userRepo.findAll();
+		List<UserDto> userDtos = users.stream().map(user -> this.modelMapper.map(user, UserDto.class)).collect(Collectors.toList());
+
+		return userDtos;
 	}
 
 	@Override
 	public void deleteUser(Long id) {
 		User user = this.userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("User ", " id ", id));
-		this.userRepo.delete(user);
+		user.setDeleted(true);
+		user.setActive(false);
+		this.userRepo.save(user);
 	}
 
 	@Override
@@ -53,8 +60,12 @@ public class UserServImp implements UserServ {
 		User user = this.userRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("User ", " id " , id));
 		user.setEmail(userDto.getEmail());
 		user.setPassword(userDto.getPassword());
-
-		return null;
+		user.setAbout(userDto.getAbout());
+		user.setPhNo(userDto.getPhNo());
+		user.setPicture(userDto.getPicture());
+		user.setUsername(userDto.getUsername());
+		User user1 = this.userRepo.save(user);
+		return this.modelMapper.map(user1, UserDto.class);
 	}
 
 }
