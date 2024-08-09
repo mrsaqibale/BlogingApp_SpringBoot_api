@@ -32,12 +32,12 @@ public class UserCont {
     }
 
     // update user PUT
-    @PutMapping("path/{id}")
-    public String putMethodName(@PathVariable String id, @RequestBody String entity) {
-        //TODO: process PUT request
-        
-        return entity;
+    @PutMapping("update/{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id , @RequestBody UserDto userDto){
+        UserDto user = this.userServ.updateUser(userDto, id);
+        return ResponseEntity.ok(user);
     }
+    
     // delete user DELETE
     @DeleteMapping("/{userId}")
     public String deleteUser(@PathVariable Long userId){
