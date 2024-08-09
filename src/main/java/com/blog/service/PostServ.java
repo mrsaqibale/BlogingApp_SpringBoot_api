@@ -13,4 +13,6 @@ public interface PostServ {
     PostDto getPostById(Long id );
 
     List<PostDto> getAllPosts();
+
+    List<PostDto> getPostByCategory(String category);
 }

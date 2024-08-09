@@ -65,5 +65,11 @@ public class PostServImp implements PostServ {
         List<PostDto> postDtos = posts.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
         return postDtos;
 	}
+
+	// custom methods 
+	public List<PostDto> getPostByCategory(String category){
+		
+		return null;
+	}
     
 }
