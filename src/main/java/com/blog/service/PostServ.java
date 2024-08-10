@@ -4,7 +4,7 @@ import com.blog.dto.PostDto;
 import java.util.List;
 
 public interface PostServ {
-    PostDto createPost(PostDto postDto);
+    PostDto createPost(PostDto postDto,Long userId, Long categoryId);
 
     PostDto updatePost(Long id, PostDto postDto);
 

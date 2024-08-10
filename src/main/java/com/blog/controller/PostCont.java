@@ -19,17 +19,17 @@ import com.blog.payloads.ApiResponse;
 import com.blog.service.PostServ;
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/api")
 public class PostCont {
     
 
     @Autowired
     private PostServ postServ;
 
-    // create post
-    @PostMapping("/")
-    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
-        PostDto post = this.postServ.createPost(postDto);
+    // create post get the data of category and also user
+    @PostMapping("/user/{userId}/category/{categoryId}/posts/")
+    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto, @PathVariable Long userId, @PathVariable Long categoryId){
+        PostDto post = this.postServ.createPost(postDto,userId, categoryId);
         return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
 
@@ -50,7 +50,7 @@ public class PostCont {
 
 
     // get post by id 
-    @GetMapping("/{id}")
+    @GetMapping("/posts/{id}")
     public ResponseEntity<PostDto> getPostById(@PathVariable Long id){
         PostDto postDto = this.postServ.getPostById(id);
         return ResponseEntity.ok(postDto);
@@ -66,8 +66,9 @@ public class PostCont {
 
 
     // custom methods
-    @GetMapping("/category/{id}")
+    @GetMapping("/category/{id}/posts/")
     public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable Long id){
+        System.out.println(id);
         List<PostDto> postDto = this.postServ.getPostByCategory(id);
         return ResponseEntity.ok(postDto);
         }

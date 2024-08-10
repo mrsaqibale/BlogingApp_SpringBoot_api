@@ -9,6 +9,6 @@ import com.blog.entites.Post;
 
 public interface PostRepo extends JpaRepository<Post, Long>{
 
-    // List<Post> findBycategory(Category category);
+    List<Post> findByCategory(Category category);
 
 }

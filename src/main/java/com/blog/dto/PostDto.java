@@ -26,7 +26,7 @@ public class PostDto {
     private LocalDateTime updateDate;
     
     
-    // private User users;
+    private UserDto users;
 
-    private Category category;
+    private CategoryDto category;
 }
