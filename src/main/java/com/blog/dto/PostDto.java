@@ -28,5 +28,5 @@ public class PostDto {
     
     // private User users;
 
-    private Category categories;
+    private Category category;
 }

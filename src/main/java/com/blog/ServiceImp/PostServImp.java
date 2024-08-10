@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.blog.dto.PostDto;
+import com.blog.entites.Category;
 import com.blog.entites.Post;
 import com.blog.exceptions.ResourceNotFoundException;
+import com.blog.repository.CategoryRepo;
 import com.blog.repository.PostRepo;
 import com.blog.service.PostServ;
 
@@ -23,6 +25,8 @@ public class PostServImp implements PostServ {
     @Autowired
     private PostRepo postRepo;
 
+	@Autowired
+	private CategoryRepo categoryRepo;
 
 	@Override
 	public PostDto createPost(PostDto postDto) {
@@ -66,9 +70,22 @@ public class PostServImp implements PostServ {
         return postDtos;
 	}
 
+
 	// custom methods 
-	public List<PostDto> getPostByCategory(String category){
-		
+    public List<PostDto> getPostByCategory(Long id){
+		// Category category = this.categoryRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Category", "Id", id));
+		// System.out.println(category);
+		// List<Post> posts= this.postRepo.findByCategory(category);
+		// List<PostDto> postDtos = posts.stream().map((post) -> this.modelMapper.map(posts, PostDto.class)).collect(Collectors.toList());
+		// return postDtos;
+		return null;
+	}
+
+    public List<PostDto> getPostByUser(Long id){
+		return null;
+	}
+
+    public List<PostDto> searchPostByString(String key){
 		return null;
 	}
     

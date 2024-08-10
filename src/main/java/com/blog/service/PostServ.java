@@ -14,5 +14,9 @@ public interface PostServ {
 
     List<PostDto> getAllPosts();
 
-    List<PostDto> getPostByCategory(String category);
+    List<PostDto> getPostByCategory(Long id);
+
+    List<PostDto> getPostByUser(Long id);
+
+    List<PostDto> searchPostByString(String key);
 }
