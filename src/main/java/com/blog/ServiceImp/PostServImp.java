@@ -47,7 +47,7 @@ public class PostServImp implements PostServ {
         post.setCreateDate(LocalDateTime.now());
         post.setUpdateDate(LocalDateTime.now());
 		post.setCategory(category);
-		post.setUsers(user);
+		post.setUser(user);
         Post fpost = this.postRepo.save(post);
 		return this.modelMapper.map(fpost, PostDto.class);
 	}

@@ -28,5 +28,5 @@ public class Role {
 
 
     @ManyToMany
-    private List<User> users;
+    private List<User> user;
 }

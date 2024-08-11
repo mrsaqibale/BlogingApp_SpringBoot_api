@@ -33,6 +33,6 @@ public class Comment {
     
     
     @ManyToOne
-    private User users;
+    private User user;
 
 }

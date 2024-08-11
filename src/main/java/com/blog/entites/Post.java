@@ -42,7 +42,7 @@ public class Post {
     
 
     @ManyToOne
-    private User users;
+    private User user;
 
 
     @ManyToOne
