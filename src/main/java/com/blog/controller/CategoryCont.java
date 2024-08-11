@@ -37,7 +37,7 @@ public class CategoryCont {
         return new ResponseEntity<>(category, HttpStatus.OK);
     }
     // delete
-    @DeleteMapping("category/")
+    @DeleteMapping("cat/")
     public ResponseEntity<ApiResponse> deleteCategory(@PathVariable Long id){
         this.categoryServ.deleteCategory(id);
         return new ResponseEntity<>(new ApiResponse("Category deleted successfully", true), HttpStatus.OK);
