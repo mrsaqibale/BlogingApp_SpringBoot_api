@@ -8,5 +8,5 @@ import com.blog.entites.Category;
  * CategoryRepo
  */
 public interface CategoryRepo extends JpaRepository<Category, Long> {
-     
+
 }

@@ -1,6 +1,11 @@
 package com.blog.dto;
 
 
+import java.util.List;
+
+import com.blog.entites.Comment;
+import com.blog.entites.Post;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,7 +37,7 @@ public class UserDto {
 	
 	// private List<Role> roles ;
 	
-	// private List<Comment> comments ;
+	private List<Comment> comment ;
 
-	// private List<Post> posts ;
+	private List<Post> post ;
 }

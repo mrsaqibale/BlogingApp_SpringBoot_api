@@ -1,6 +1,10 @@
 package com.blog.dto;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.blog.entites.Post;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,9 +22,9 @@ public class CategoryDto {
 
     private String title;
 
-    private Date assignDate;
+    private LocalDateTime createDate;
 
-    private boolean isDeleted = false;
+    private boolean isDeleted;
 
-    // private List<Post> posts ;
+    // private List<Post> post ;
 }

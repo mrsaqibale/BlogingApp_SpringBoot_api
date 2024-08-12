@@ -14,29 +14,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.blog.ServiceImp.PostServImp;
 import com.blog.dto.PostDto;
 import com.blog.payloads.ApiResponse;
+import com.blog.service.PostServ;
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/api")
 public class PostCont {
     
 
     @Autowired
-    private PostServImp postServImp;
+    private PostServ postServ;
 
-    // create post
-    @PostMapping("/")
-    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
-        PostDto post = this.postServImp.createPost(postDto);
+    // create post get the data of category and also user
+    @PostMapping("/user/{userId}/category/{categoryId}/posts/")
+    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto, @PathVariable Long userId, @PathVariable Long categoryId){
+        PostDto post = this.postServ.createPost(postDto,userId, categoryId);
         return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
 
     // update post
     @PutMapping("update/{id}")
     public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto , @PathVariable Long id ){
-        PostDto post = this.postServImp.updatePost(id, postDto);
+        PostDto post = this.postServ.updatePost(id, postDto);
         return ResponseEntity.ok(post);
     }
     
@@ -44,15 +44,15 @@ public class PostCont {
     // delete post
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deletePost(@PathVariable Long id){
-        this.postServImp.deletePost(id);
+        this.postServ.deletePost(id);
         return new ResponseEntity<ApiResponse>(new ApiResponse("Post deleted ", true), HttpStatus.OK);
     }
 
 
     // get post by id 
-    @GetMapping("/{id}")
+    @GetMapping("/posts/{id}")
     public ResponseEntity<PostDto> getPostById(@PathVariable Long id){
-        PostDto postDto = this.postServImp.getPostById(id);
+        PostDto postDto = this.postServ.getPostById(id);
         return ResponseEntity.ok(postDto);
     }
     
@@ -60,7 +60,16 @@ public class PostCont {
     // get all posts
     @GetMapping("/")
     public ResponseEntity<List<PostDto>> getAllPosts(){
-        List<PostDto> postDto = this.postServImp.getAllPosts();
+        List<PostDto> postDto = this.postServ.getAllPosts();
         return ResponseEntity.ok(postDto);
     }
+
+
+    // custom methods
+    @GetMapping("/category/{id}/posts/")
+    public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable Long id){
+        System.out.println(id);
+        List<PostDto> postDto = this.postServ.getPostByCategory(id);
+        return ResponseEntity.ok(postDto);
+        }
 }

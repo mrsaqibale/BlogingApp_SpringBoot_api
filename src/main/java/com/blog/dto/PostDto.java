@@ -2,6 +2,8 @@ package com.blog.dto;
 
 import java.time.LocalDateTime;
 
+import com.blog.entites.Category;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +26,7 @@ public class PostDto {
     private LocalDateTime updateDate;
     
     
-    // private User users;
+    private UserDto user;
 
-    // private Category categories;
+    private CategoryDto category;
 }

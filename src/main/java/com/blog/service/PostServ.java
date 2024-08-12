@@ -4,7 +4,7 @@ import com.blog.dto.PostDto;
 import java.util.List;
 
 public interface PostServ {
-    PostDto createPost(PostDto postDto);
+    PostDto createPost(PostDto postDto,Long userId, Long categoryId);
 
     PostDto updatePost(Long id, PostDto postDto);
 
@@ -13,4 +13,10 @@ public interface PostServ {
     PostDto getPostById(Long id );
 
     List<PostDto> getAllPosts();
+
+    List<PostDto> getPostByCategory(Long id);
+
+    List<PostDto> getPostByUser(Long id);
+
+    List<PostDto> searchPostByString(String key);
 }

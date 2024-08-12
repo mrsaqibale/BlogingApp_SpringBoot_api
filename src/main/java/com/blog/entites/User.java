@@ -48,16 +48,16 @@ public class User {
 	private boolean isDeleted = false;
 	
 	
-	@ManyToMany(mappedBy = "users")
-	private List<Role> roles ;
+	@ManyToMany(mappedBy = "user")
+	private List<Role> role ;
 	
 
-	@OneToMany(mappedBy = "users")
-	private List<Comment> comments ;
+	@OneToMany(mappedBy = "user")
+	private List<Comment> comment ;
 
 	
-	@OneToMany(mappedBy = "users")
-	private List<Post> posts ;
+	@OneToMany(mappedBy = "user")
+	private List<Post> post;
 
 
 }

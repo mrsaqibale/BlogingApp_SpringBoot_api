@@ -1,5 +1,9 @@
 package com.blog.dto;
 
+import java.util.List;
+
+import com.blog.entites.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +19,5 @@ public class RollDto {
 
     private String name;
 
-    // private List<User> users;
+    private List<User> user;
 }

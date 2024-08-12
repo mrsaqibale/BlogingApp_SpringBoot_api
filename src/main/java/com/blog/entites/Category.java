@@ -1,9 +1,10 @@
 package com.blog.entites;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,12 +31,12 @@ public class Category {
     private String title;
 
     @Column(nullable = false)
-    private Date assignDate;
+    private LocalDateTime createDate;
 
     @Column(nullable = false)
     private boolean isDeleted = false;
 
 
-    @OneToMany(mappedBy = "categories")
-    private List<Post> posts ;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> post = new ArrayList<>();
 }

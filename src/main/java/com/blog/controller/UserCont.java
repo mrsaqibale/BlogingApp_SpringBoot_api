@@ -1,5 +1,7 @@
 package com.blog.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.blog.dto.UserDto;
+import com.blog.payloads.ApiResponse;
 import com.blog.service.UserServ;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +28,7 @@ public class UserCont {
 
     // create user POST
     @PostMapping("/")
-    public ResponseEntity<UserDto> createUser(UserDto userDto){
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){
         System.out.println("the data is " + userDto.getEmail());
         UserDto user = userServ.createUser(userDto);
         return new  ResponseEntity<>(user,HttpStatus.CREATED);
@@ -40,9 +43,9 @@ public class UserCont {
     
     // delete user DELETE
     @DeleteMapping("/{userId}")
-    public String deleteUser(@PathVariable Long userId){
+    public ResponseEntity<ApiResponse> deleteUser(@PathVariable Long userId){
         userServ.deleteUser(userId);
-        return "ok";
+        return new ResponseEntity<>(new ApiResponse("User deleted ", true),HttpStatus.OK);
     }
 
 
@@ -50,6 +53,12 @@ public class UserCont {
     @GetMapping("/{userId}")
     public ResponseEntity<UserDto> getSingleUser(@PathVariable Long userId){
         return ResponseEntity.ok(userServ.getUserById(userId));
+    }
+
+    // get all users
+    @GetMapping("/")
+    public ResponseEntity<List<UserDto>> getAllUsers(){
+        return ResponseEntity.ok(this.userServ.getAllUsers());
     }
 
 }
