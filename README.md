@@ -46,14 +46,3 @@ This is a RESTful API for a blogging app, built using Spring Boot and Java. The 
 
 The API uses JSON Web Tokens (JWT) for authentication. To authenticate, send a `POST` request to `/login` with a JSON payload containing the user's email and password.
 
-**Error Handling**
-----------------
-
-The API returns error responses in the following format:
-```json
-{
-  "error": {
-    "code": 400,
-    "message": "Bad Request"
-  }
-}
