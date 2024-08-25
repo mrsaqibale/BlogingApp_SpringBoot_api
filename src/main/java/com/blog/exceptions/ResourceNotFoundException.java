@@ -17,4 +17,11 @@ public class ResourceNotFoundException extends RuntimeException{
         this.field = field;
         this.id = id ;
     }
+
+    public ResourceNotFoundException(String resource , String field){
+        super(String.format("%s not found with username: %s",resource, field));
+        this.resource = resource;
+        this.field = field;
+
+    }
 }
