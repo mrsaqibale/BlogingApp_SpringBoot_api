@@ -5,6 +5,9 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder.BCryptVersion;
 import org.springframework.stereotype.Service;
@@ -13,16 +16,22 @@ import com.blog.dto.UserDto;
 import com.blog.entites.User;
 import com.blog.repository.UserRepo;
 import com.blog.service.UserServ;
-import com.blog.exceptions.ResourceNotFoundException;;
+import com.blog.exceptions.ResourceNotFoundException;
+import com.blog.jwt.JwtService;;
 @Service
 public class UserServImp implements UserServ {
 
+
+	@Autowired 
+	private AuthenticationManager authenticationManager;
 	@Autowired
 	private UserRepo userRepo ;
 	
 	@Autowired
 	private ModelMapper modelMapper ;
 	
+	@Autowired
+	private JwtService jwtService;
 	
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -71,6 +80,16 @@ public class UserServImp implements UserServ {
 		user.setUsername(userDto.getUsername());
 		User user1 = this.userRepo.save(user);
 		return this.modelMapper.map(user1, UserDto.class);
+	}
+
+	@Override
+	public String login(UserDto userDto) {
+		Authentication authentication = authenticationManager.
+			authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword()));
+		
+		if (authentication.isAuthenticated()) 
+			return jwtService.genrateToken(userDto.getUsername());
+		return "fail";
 	}
 
 }

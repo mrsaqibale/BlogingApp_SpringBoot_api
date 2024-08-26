@@ -10,4 +10,6 @@ public class HomeCont {
     public String index(){
         return "index page call for public users only ";
         }
+
+        
 }
