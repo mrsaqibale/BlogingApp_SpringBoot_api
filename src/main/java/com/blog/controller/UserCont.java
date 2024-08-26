@@ -26,6 +26,12 @@ public class UserCont {
     @Autowired
     private UserServ userServ;
 
+    // user login 
+    @PostMapping("sign")
+    public String login(@RequestBody UserDto userDto){
+        return this.userServ.login(userDto);      
+    }
+
     // create user POST
     @PostMapping("/")
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto){

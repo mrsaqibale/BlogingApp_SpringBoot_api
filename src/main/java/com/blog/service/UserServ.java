@@ -16,4 +16,6 @@ public interface UserServ {
 
     UserDto updateUser(UserDto userDto,Long id);
 
+    String login(UserDto userDto);
+
 }
