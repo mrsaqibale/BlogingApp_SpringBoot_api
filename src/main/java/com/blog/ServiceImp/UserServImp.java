@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder.BCryptVersion;
 import org.springframework.stereotype.Service;
 
 import com.blog.dto.UserDto;
@@ -24,7 +26,10 @@ public class UserServImp implements UserServ {
 	
 	@Override
 	public UserDto createUser(UserDto userDto) {
+		final BCryptPasswordEncoder encoders = new BCryptPasswordEncoder(BCryptVersion.$2A,12);
+		
 		User user = this.modelMapper.map(userDto, User.class);
+		user.setPassword(encoders.encode(user.getPassword()));
 		user.setDeleted(false);
 		user.setActive(true);
 		User user1 = this.userRepo.save(user);
@@ -55,9 +60,11 @@ public class UserServImp implements UserServ {
 
 	@Override
 	public UserDto updateUser(UserDto userDto,Long id) {
+		final BCryptPasswordEncoder encoders = new BCryptPasswordEncoder(BCryptVersion.$2A,12);
+
 		User user = this.userRepo.findById(id).orElseThrow(()-> new ResourceNotFoundException("User ", " id " , id));
 		user.setEmail(userDto.getEmail());
-		user.setPassword(userDto.getPassword());
+		user.setPassword(encoders.encode(userDto.getPassword()));
 		user.setAbout(userDto.getAbout());
 		user.setPhNo(userDto.getPhNo());
 		user.setPicture(userDto.getPicture());
