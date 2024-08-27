@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Jwts;
@@ -15,7 +16,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-    private String fkey;
+    // private String fkey;
     public JwtService(){
         // try {
         //     KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
@@ -42,6 +43,14 @@ public class JwtService {
     private Key getKey() {
         byte[] keyBytes = Decoders.BASE64.decode("ehllomanthisisthekeyandwhatisyourfirstnameisnofhtehishtheogoodofhtehis");
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+    public String extractUserName(String token) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'extractUserName'");
+    }
+    public boolean validateToken(String token, UserDetails userDetails) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'validateToken'");
     }
     
 }
