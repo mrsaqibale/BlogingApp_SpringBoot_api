@@ -39,10 +39,6 @@ public class SecurityConfig {
                 .build();
     }
 
-    private Object JwtFilter() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'JwtFilter'");
-    }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
