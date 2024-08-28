@@ -31,6 +31,7 @@ public class JwtService {
          throw new RuntimeException();
          }
         // fkey = "R{!D6,wY=i9vcjqMwR2P6JUNG8~v7r1cBI=?Z=uUg/!NN>&v?0j%}z,DQ6eEc&";
+         
 
     }
 
@@ -49,7 +50,7 @@ public class JwtService {
 
     private SecretKey getKey() {
         byte[] keyBytes = Decoders.BASE64
-                .decode(fkey);
+                .decode("thekeyvalidforthemanofthematchwhichisgoodforallthepersons");
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
@@ -69,15 +70,18 @@ public class JwtService {
     			.build()
     			.parseSignedClaims(token)
     			.getPayload();
+    	System.out.println("stage 4");
     	return clm ;
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
         final String userName = extractUserName(token);
+        System.out.println("is token is valid" + (userName.equals(userDetails.getUsername()) && !isTokenExpired(token)));
         return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private boolean isTokenExpired(String token) {
+    	System.out.println("is token expired " + extractExpiration(token).before(new Date()));
         return extractExpiration(token).before(new Date());
     }
 
