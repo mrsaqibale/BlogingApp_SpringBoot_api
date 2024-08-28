@@ -49,7 +49,7 @@ public class JwtService {
 
     private SecretKey getKey() {
         byte[] keyBytes = Decoders.BASE64
-                .decode("thekeyvalidforthemanofthematchwhichisgoodforallthepersons");
+                .decode(fkey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
