@@ -69,18 +69,15 @@ public class JwtService {
     			.build()
     			.parseSignedClaims(token)
     			.getPayload();
-    	System.out.println("stage 4");
     	return clm ;
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
         final String userName = extractUserName(token);
-        System.out.println("is token is valid" + (userName.equals(userDetails.getUsername()) && !isTokenExpired(token)));
         return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private boolean isTokenExpired(String token) {
-    	System.out.println("is token expired " + extractExpiration(token).before(new Date()));
         return extractExpiration(token).before(new Date());
     }
 
