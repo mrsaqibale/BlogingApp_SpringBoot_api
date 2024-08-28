@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.Base64;
 
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,15 +21,15 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-    // private String fkey;
+     private String fkey;
     public JwtService() {
-        // try {
-        // KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
-        // SecretKey sk = keyGen.generateKey();
-        // fkey = Base64.getEncoder().encodeToString(sk.getEncoded());
-        // } catch (Exception e) {
-        // throw new RuntimeException();
-        // }
+         try {
+         KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
+         SecretKey sk = keyGen.generateKey();
+         fkey = Base64.getEncoder().encodeToString(sk.getEncoded());
+         } catch (Exception e) {
+         throw new RuntimeException();
+         }
         // fkey = "R{!D6,wY=i9vcjqMwR2P6JUNG8~v7r1cBI=?Z=uUg/!NN>&v?0j%}z,DQ6eEc&";
 
     }
@@ -45,16 +47,14 @@ public class JwtService {
                 .compact();
     }
 
-    private Key getKey() {
+    private SecretKey getKey() {
         byte[] keyBytes = Decoders.BASE64
-                .decode("ehllomanthisisthekeyandwhatisyourfirstnameisnofhtehishtheogoodofhtehis");
+                .decode("thekeyvalidforthemanofthematchwhichisgoodforallthepersons");
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String extractUserName(String token) {
-        // extract the username from jwt token
         return extractClaim(token, Claims::getSubject);
-        // return extractClaim(token, Claims::getSubject);
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimResolver) {
@@ -63,20 +63,24 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-    	return Jwts.parser()
+    	Claims clm;
+    	clm = Jwts.parser()
     			.verifyWith((SecretKey) getKey())
     			.build()
     			.parseSignedClaims(token)
     			.getPayload();
-        
+    	System.out.println("stage 4");
+    	return clm ;
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
         final String userName = extractUserName(token);
+        System.out.println("is token is valid" + (userName.equals(userDetails.getUsername()) && !isTokenExpired(token)));
         return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private boolean isTokenExpired(String token) {
+    	System.out.println("is token expired " + extractExpiration(token).before(new Date()));
         return extractExpiration(token).before(new Date());
     }
 

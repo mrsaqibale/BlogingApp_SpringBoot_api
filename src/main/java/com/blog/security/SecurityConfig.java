@@ -20,8 +20,8 @@ import com.blog.filter.JwtFilter;
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
-    private JwtFilter jwtFilter;
+	@Autowired
+	public JwtFilter jwtFilter;
 
     
     @Autowired
@@ -37,6 +37,11 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
+    }
+
+    private Object JwtFilter() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'JwtFilter'");
     }
 
     @Bean
