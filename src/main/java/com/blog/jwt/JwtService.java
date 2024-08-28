@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -61,11 +63,12 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .verifyWith(getKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+    	return Jwts.parser()
+    			.verifyWith((SecretKey) getKey())
+    			.build()
+    			.parseSignedClaims(token)
+    			.getPayload();
+        
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
