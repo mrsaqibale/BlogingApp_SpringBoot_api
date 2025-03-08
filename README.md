@@ -41,8 +41,4 @@ This is a RESTful API for a blogging app, built using Spring Boot and Java. The 
 * **PUT /users/:id**: Update an existing user
 * **DELETE /users/:id**: Delete a user
 
-**Authentication**
----------------
-
-The API uses JSON Web Tokens (JWT) for authentication. To authenticate, send a `POST` request to `/login` with a JSON payload containing the user's email and password.
 
